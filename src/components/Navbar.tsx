@@ -34,7 +34,7 @@ export function Navbar() {
         </nav>
 
         <button
-          onClick={() => setTheme(theme === 'dark' ? 'dark' : 'light')}
+          onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
           style={{borderColor: 'var(--border)', color: 'var(--text-muted)'}}
           className="w-8 h-8 flex items-center justify-center rounded border transition-colors hover:bg-black/5 dark:hover:bg-white/5"
           aria-label="Toggle theme"
