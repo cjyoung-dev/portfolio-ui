@@ -59,7 +59,7 @@ async function apiFetch<T>(path: string, params?: Record<string, string >): Prom
   }
   const res = await fetch(url.toString());
   if (!res.ok) {
-    throw new Error(`${res.statusText} ${res.statusText}`);
+    throw new Error(`${res.status} ${res.statusText}`);
   }
   return res.json();
 }
