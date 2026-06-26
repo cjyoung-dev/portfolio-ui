@@ -26,7 +26,7 @@ export function ContactForm() {
     setSubmitState({ status: 'loading' })
     try {
       const { status, data } = await api.contact(form)
-      setSubmitState({ status: 'success', statusCode: status, message: data.message })
+      setSubmitState({ status: 'success', statusCode: status, message: data.data.message })
       setForm(emptyForm)
     } catch (err) {
       setSubmitState({

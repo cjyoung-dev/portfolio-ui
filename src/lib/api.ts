@@ -61,7 +61,7 @@ export type Contact = {
 
 export type ContactResponse = {
   success: boolean;
-  message: string;
+  data: {message: string};
 }
 
 async function apiPost<T>(path: string, body: unknown): Promise<{status: number; data: T}> {
