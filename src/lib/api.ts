@@ -52,6 +52,32 @@ export type Experience = {
   highlights: string[];
 }
 
+export type Contact = {
+  name: string;
+  email: string;
+  company: string;
+  message: string;
+}
+
+export type ContactResponse = {
+  success: boolean;
+  message: string;
+}
+
+async function apiPost<T>(path: string, body: unknown): Promise<{status: number; data: T}> {
+  const url = new URL(BASE_URL + path);
+  const res = await fetch(url.toString(), {
+    method: "POST",
+    headers: {'Content-Type': 'application/json'},
+    body: JSON.stringify(body),
+  })
+  const data = await res.json()
+  if(!res.ok) {
+    throw new Error(data?.error || `${res.status} ${res.statusText}`)
+  }
+  return {status: res.status, data}
+}
+
 async function apiFetch<T>(path: string, params?: Record<string, string >): Promise<ApiResponse<T>> {
   const url = new URL(`${BASE_URL}${path}`)
   if (params) {
@@ -69,4 +95,5 @@ export const api = {
   projects: (params?: Record<string, string>) => apiFetch<Project[]>('/api/projects', params),
   skills: (params?: Record<string, string>) => apiFetch<Skill[]>('/api/skills', params),
   experience: (params?: Record<string, string>) => apiFetch<Experience[]>('/api/experience', params),
+  contact: (payload: Contact) => apiPost<ContactResponse>('/api/contact', payload),
 }
